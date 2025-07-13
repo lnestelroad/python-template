@@ -1,0 +1,144 @@
+site_name: Python Template
+site_url: https://pages.github.com/lnestelroad/python-template
+
+repo_name: Python Template
+repo_url: https://github.com/lnestelroad/python-template
+copyright: "Copyright (c) 2025 Crebain Consulting LLC."
+
+extra_css:
+    - stylesheets/colors.css
+
+extra_javascript:
+    - javascripts/mathjax.js
+    - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+theme: 
+    name: material
+    custom_dir: docs/overrides
+    favicon: images/favicon.png
+    logo: images/favicon.png
+    language: en
+    features:
+        - content.code.copy
+        - content.code.select
+        - content.tabs.link
+        - navigation.footer
+        - navigation.tabs
+        - navigation.top
+        - search.highlight
+        - search.suggest
+        - toc.follow
+
+    palette:
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: red
+          accent: blue
+          toggle:
+            icon: material/weather-sunny
+            name: Switch to dark mode
+
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: blue
+          accent: pink
+          toggle:
+            icon: material/weather-night
+            name: Switch to light mode
+
+nav:
+    - Home: 
+        - Welcome: README.md
+        - Installation: 404.md
+        - Usage: 404.md
+    - Concepts: concepts/README.md
+    - Guides: 404.md
+    - Examples: 404.md
+    - API Reference:
+        - Main: api/main.md
+    - ADR: 
+        - Home: decisions/README.md 
+        - decisions/0000-use-markdown-architectural-decision-records.md
+
+
+markdown_extensions: 
+    - nl2br
+
+    # Python Markdown
+    - abbr
+    - admonition
+    - attr_list
+    - def_list
+    - footnotes
+    - md_in_html
+    - toc:
+        permalink: true
+
+    # Python Markdown Extensions
+    - pymdownx.arithmatex:
+        generic: true
+    - pymdownx.betterem:
+        smart_enable: all
+    - pymdownx.caret
+    - pymdownx.details
+    - pymdownx.emoji:
+        emoji_index: !!python/name:material.extensions.emoji.twemoji
+        emoji_generator: !!python/name:material.extensions.emoji.to_svg
+    - pymdownx.highlight
+    - pymdownx.snippets
+    - pymdownx.inlinehilite
+    - pymdownx.keys
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences:
+        # make exceptions to highlighting of code:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:mermaid2.fence_mermaid_custom
+    - pymdownx.tabbed:
+        alternate_style: true
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+
+
+plugins: 
+    - callouts
+    - search
+    - tags
+    - mermaid2
+    - mkdocstrings:
+        handlers:
+          python:
+            paths: [.]
+            options:
+              docstring_options:
+                ignore_init_summary: true
+              docstring_section_style: spacy
+              filters: ["!^_"]
+              inherited_members: true
+              members_order: source
+              merge_init_into_class: true
+              separate_signature: true
+              show_if_no_docstring: true
+              show_root_heading: true
+              show_signature_annotations: true
+              show_symbol_type_heading: true
+              show_symbol_type_toc: true
+              signature_crossrefs: true
+            inventories:
+              - url: https://docs.python.org/3/objects.inv
+                domains: [py, std]
+              - url: https://typing-extensions.readthedocs.io/en/latest/objects.inv
+    - macros:
+        on_undefined: strict
+        module_name: docs/macros
+    - git-revision-date-localized:
+        enable_creation_date: true
+extra:
+  tags:
+    Sandbox: sandbox
+    Incubation: incubation
+    Graduated: graduated
+    Archived: archived

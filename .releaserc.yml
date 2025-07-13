@@ -1,0 +1,39 @@
+---
+branches:
+    - name: "+([1-9])?(.{+([0-9]),x}).x" # https://github.com/micromatch/micromatch#matching-features
+    - main
+    - next
+    - name: beta
+      prerelease: true
+    - name: alpha
+      prerelease: true
+# tagFormat: "${version}"
+plugins:
+    - - "@semantic-release/commit-analyzer"
+      - preset: conventionalcommits
+        releaseRules:
+            - type: build
+              release: "patch"
+            - type: chore
+              release: "patch"
+            - type: ci
+              release: "patch"
+            - type: docs
+              release: "patch"
+            - type: style
+              release: "patch"
+            - type: refactor
+              release: "patch"
+            - type: pref
+              release: "patch"
+            - type: test
+              release: "patch"
+            - scope: no-release
+              release: false
+        parserOpts:
+            noteKeywords:
+                - BREAKING CHANGE
+                - BREAKING CHANGES
+ 
+    - - "@semantic-release/release-notes-generator"
+      - preset: conventionalcommits

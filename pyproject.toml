@@ -1,0 +1,187 @@
+[project]
+name = "python-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "python-json-logger>=3.3.0",
+    "rich>=14.0.0",
+    "typing-extensions>=4.14.1",
+]
+
+[dependency-groups]
+dev = [
+    "deptry>=0.23.0",
+    "mike>=2.1.3",
+    "mkdocs-callouts>=1.16.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.4.7",
+    "mkdocs-macros-plugin>=1.3.7",
+    "mkdocs-material>=9.6.15",
+    "mkdocs-mermaid2-plugin>=1.2.1",
+    "mkdocstrings[python]>=0.29.1",
+    "mypy>=1.16.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "ruff>=0.12.3",
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-fail-under 99 --cov-report=term-missing --cov-branch"
+
+[tool.mypy]
+disallow_untyped_defs = true
+allow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+warn_unused_configs = true
+disallow_incomplete_defs = true
+ignore_missing_imports = true
+files = ["."]
+exclude = [
+    ".venv",
+    ".cache",
+    "build",
+    "app",
+    "lib",
+    "web_app",
+    "tests",
+    "docs",
+    "scripts",
+]
+install_types = true
+non_interactive = true
+pretty = true
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.9
+target-version = "py39"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["ALL"]
+ignore = [
+    # Always include COM812 and ISC001 to avoid conflicts with Ruff formatting.
+    "COM812", 
+    "ISC001",
+    # Allow TODO comments that are linked to issues.
+    "FIX002",
+    "TD002",
+    # Add project specifics below as needed.
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+[lint.isort]
+# Ensure that nothing else is imported from the same namespace as star imports.
+combine-as-imports = true
+
+# Enforce one aliased import (e.g. import A as B) per line in grouped imports.
+force-wrap-aliases = true
+
+# TODO (ANYONE!): Uncomment for Python <= 3.9, and delete for Python >= 3.10.
+# Support PEP 563 - Postponed Evaluation of Annotations:
+#   https://peps.python.org/pep-0563/
+required-imports = ["from __future__ import annotations"]
+
+[lint.mccabe]
+# Cap cyclomatic complexity at 10:
+#   https://en.wikipedia.org/wiki/Cyclomatic_complexity
+max-complexity = 10
+
+[lint.per-file-ignores]
+# Ignore specific errors codes when linting tests.
+"tests/*" = [
+    # Allow usage of the `assert` keyword in your test code.
+    "S101",
+    # Add project specifics below as needed.
+    "D103",
+    "D102",
+    "D100",   # docstrings for tests not needed.
+    "E501",
+    "ANN001",
+    "ANN201",
+    "ARG001", # ARG001 Unused function argument
+]
+
+[lint.pydocstyle]
+# Enforce Google-style docstrings:
+#   https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings.
+convention = "google"
+
+[lint.pylint]
+# Do not permit functions and methods to have more than 6 parameters.
+max-args = 3

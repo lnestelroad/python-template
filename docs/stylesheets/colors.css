@@ -1,0 +1,16 @@
+h1,
+h2,
+h3,
+th {
+  color: var(--md-primary-fg-color);
+}
+
+.md-header {
+  background-color: #e63946;
+}
+.md-tabs {
+  background-color: #6a0400;
+}
+.md-footer {
+  background-color: #0001fc;
+}
